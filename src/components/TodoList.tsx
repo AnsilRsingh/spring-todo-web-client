@@ -3,6 +3,7 @@ import Todo from "../service/Todo";
 import {getTodos} from "../service/todoService";
 import TodoItem from "./TodoItem";
 import {Space} from "antd";
+import TodoForm from "./TodoForm";
 interface TodoListState {
     todos: Todo[];
     loading: boolean;
@@ -27,6 +28,7 @@ class TodoList extends Component<any, TodoListState> {
                     </>
                 ) : (
                     <>
+                        <TodoForm />
                         <Space direction="vertical" style={{width: 300}}>
                             {this.state.todos.map((todo: Todo) =>
                                 <TodoItem key ={todo.id} todo={todo}/>
