@@ -1,6 +1,8 @@
+
 .button {
     margin-left: 1em;
 }
+
 .todoBody{
     text-align: center;
 }
@@ -9,8 +11,13 @@
     text-align: center;
 }
 
-.todoCards {
+.todoCard {
     width: 300px;
     height: 300px;
     margin: 1em 4em;
+}
+
+.dangerDeleteTodo{
+    color: red;
+    font-size: large;
 }
