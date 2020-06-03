@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Todo from "./Todo";
-import {Simulate} from "react-dom/test-utils";
+
 
 
 const base_url = 'https://ansil-r-todo.herokuapp.com/api/todos';
