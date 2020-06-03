@@ -1,8 +1,12 @@
-import React, {Component} from 'react';
-import { Card, Checkbox, Col, Button, Modal} from 'antd';
+
+import {Component} from "react";
+import {Space, Card, Checkbox, Col, Button, Modal} from "antd";
+import React from "react";
 import Todo from "../service/Todo";
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 import {deleteTodoById} from "../service/todoService";
+import TodoUpdateModal from "./TodoUpdateModal";
+
 
 interface TodoProp {
     todo: Todo;
@@ -11,12 +15,21 @@ interface TodoProp {
 
 interface TodoState {
     modalVisible: boolean;
+
+    updateModalVisible: boolean;
+
 }
 class TodoItem extends Component<TodoProp, TodoState> {
     constructor(props: TodoProp) {
         super(props);
         this.state = {
+
+            modalVisible: false,
+            updateModalVisible: false,
+
+
             modalVisible: false
+
         }
     }
 
@@ -33,10 +46,22 @@ class TodoItem extends Component<TodoProp, TodoState> {
         });
     };
 
+
+    handleUpdate = () => {
+        this.setState({
+            updateModalVisible: true
+        })
+    }
+    handleCancel = () => {
+        this.setState({
+            modalVisible: false,
+            updateModalVisible: false
+
     handleCancel = (e: any) => {
         console.log(e);
         this.setState({
             modalVisible: false,
+
         });
     };
 
@@ -54,7 +79,12 @@ class TodoItem extends Component<TodoProp, TodoState> {
                 <Card title={this.props.todo.title} className={styles.todoCard}>
                     <p>Description:</p>
                     <p>{this.props.todo.description}</p>
+
+                    <p>Complete: <Checkbox disabled checked={this.props.todo.complete}/></p>
+                    <Button type="primary" onClick={this.handleUpdate}>Update</Button>
+
                     <p>Complete: <Checkbox defaultChecked={this.props.todo.complete} disabled /></p>
+
                     <Button type="primary" danger onClick={this.deleteTodo}>
                         Delete
                     </Button>
@@ -66,11 +96,20 @@ class TodoItem extends Component<TodoProp, TodoState> {
                     >
                         <p className={styles.dangerDeleteTodo}>In order to delete a todo, it MUST be completed!</p>
                     </Modal>
+
+                    <TodoUpdateModal visible={this.state.updateModalVisible}
+                                     todo={this.props.todo}
+                                     onCancel={this.handleCancel}
+                                     reload={this.props.reload}/>
+
                 </Card>
             </Col>
         );
     }
 }
 
+
+=======
 // @ts-ignore
+
 export default TodoItem;
